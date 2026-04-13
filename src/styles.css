@@ -1,0 +1,93 @@
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Geist, "Segoe UI", Arial, sans-serif;
+  background: #07131f;
+}
+
+.leaflet-container {
+  font-family: Inter, Geist, "Segoe UI", Arial, sans-serif;
+  background: #06111d;
+}
+
+.leaflet-control-attribution {
+  border-radius: 6px 0 0 0;
+  background: rgba(7, 19, 31, 0.72) !important;
+  color: rgba(238, 246, 251, 0.44) !important;
+  backdrop-filter: blur(10px);
+}
+
+.leaflet-control-attribution a {
+  color: rgba(40, 182, 200, 0.75) !important;
+}
+
+.amg-map-tooltip {
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 8px !important;
+  background: rgba(7, 19, 31, 0.86) !important;
+  color: #ffffff !important;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(14px);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.amg-map-tooltip::before {
+  display: none;
+}
+
+.amg-marker-halo {
+  animation: amg-marker-pulse 2.6s ease-in-out infinite;
+}
+
+.amg-route {
+  animation: amg-route-flow 4.4s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(40, 182, 200, 0.24));
+}
+
+@keyframes amg-marker-pulse {
+  0%,
+  100% {
+    stroke-opacity: 0.34;
+    fill-opacity: 0.1;
+  }
+
+  50% {
+    stroke-opacity: 0.08;
+    fill-opacity: 0.03;
+  }
+}
+
+@keyframes amg-route-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -64;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .amg-marker-halo,
+  .amg-route {
+    animation: none;
+  }
+}
