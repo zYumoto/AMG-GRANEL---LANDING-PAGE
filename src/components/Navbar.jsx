@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react";
+﻿import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { navItems } from "../lib/content.js";
 import { containerClass } from "./SectionShell.jsx";
@@ -7,20 +7,20 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-night/75 backdrop-blur-2xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/80 text-white backdrop-blur-xl">
       <nav
-        className={`${containerClass} relative flex min-h-16 items-center justify-between gap-4 sm:min-h-20 lg:gap-8`}
+        className={`${containerClass} flex min-h-20 items-end justify-between gap-5 py-4 lg:min-h-24`}
         aria-label="Navegação principal"
       >
-        <a href="#inicio" className="flex min-w-0 items-center gap-3">
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-brass/50 bg-gradient-to-br from-brass/20 to-ocean/10 text-xs font-black text-brass sm:h-12 sm:w-12 sm:text-sm">
+        <a href="#inicio" className="flex min-w-0 items-end gap-3 pb-1">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-cyan text-sm font-black text-ink">
             AMG
           </span>
-          <span className="grid min-w-0">
-            <strong className="max-w-[13rem] truncate text-sm font-extrabold text-white sm:max-w-none sm:text-base">
+          <span className="grid min-w-0 leading-none">
+            <strong className="truncate text-sm font-black uppercase text-white sm:text-base">
               Agência Marítima Granel
             </strong>
-            <small className="hidden text-xs text-mist/60 sm:block">
+            <small className="mt-1 hidden text-xs font-bold text-white/55 sm:block">
               Santos, São Paulo, Brasil
             </small>
           </span>
@@ -28,18 +28,18 @@ export function Navbar() {
 
         <button
           type="button"
-          className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-white/15 bg-white/5 text-white transition hover:border-ocean/50 hover:bg-ocean/10 sm:h-11 sm:w-11 lg:hidden"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-white/20 bg-white/10 text-white lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-controls="menu-principal"
         >
-          <Menu size={20} />
+          {open ? <X size={20} /> : <Menu size={20} />}
           <span className="sr-only">Abrir menu</span>
         </button>
 
         <div
           id="menu-principal"
-          className={`absolute left-4 right-4 top-full mt-3 rounded-lg border border-white/15 bg-night/95 p-4 shadow-premium backdrop-blur-2xl sm:left-6 sm:right-6 lg:static lg:mt-0 lg:flex lg:items-center lg:gap-6 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${
+          className={`absolute left-5 right-5 top-full mt-3 rounded-md border border-white/15 bg-ink p-4 shadow-premium lg:static lg:mt-0 lg:flex lg:items-center lg:gap-7 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none ${
             open ? "grid gap-4" : "hidden"
           }`}
         >
@@ -48,7 +48,7 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="text-sm font-bold text-mist/70 transition duration-300 hover:text-white"
+              className="text-sm font-black text-white/70 transition duration-300 hover:text-white"
             >
               {item.label}
             </a>
@@ -56,12 +56,14 @@ export function Navbar() {
           <a
             href="#contato"
             onClick={() => setOpen(false)}
-            className="inline-flex min-h-11 items-center justify-center rounded-lg border border-brass/50 bg-brass/10 px-4 text-sm font-extrabold text-white transition duration-300 hover:border-brass/80 hover:bg-brass/20"
+            className="inline-flex min-h-11 items-center justify-center rounded-md bg-white px-4 text-sm font-black text-ink transition duration-300 hover:bg-cyan"
           >
-            Falar com a AMG
+            Contato
           </a>
         </div>
       </nav>
     </header>
   );
 }
+
+

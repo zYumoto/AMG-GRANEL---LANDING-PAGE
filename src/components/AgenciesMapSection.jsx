@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+﻿import { AnimatePresence, motion } from "framer-motion";
 import { MapPin, Navigation } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { CircleMarker, MapContainer, Polyline, TileLayer, Tooltip, useMap } from "react-leaflet";
@@ -15,22 +15,19 @@ export function AgenciesMapSection() {
   const [activeAgency, setActiveAgency] = useState(hub);
 
   return (
-    <SectionShell id="agencias" className="bg-[linear-gradient(180deg,#07131f_0%,#0a1b2b_55%,#07131f_100%)]">
-      <div className="grid items-center gap-10 lg:grid-cols-[minmax(280px,.54fr)_minmax(0,1.46fr)] lg:gap-14 xl:gap-16">
+    <SectionShell id="agencias" className="bg-[linear-gradient(180deg,#dfe8eb_0%,#fbfcfe_100%)] text-ink">
+      <div className="grid items-center gap-10 lg:grid-cols-[minmax(280px,.5fr)_minmax(0,1.5fr)] lg:gap-14 xl:gap-16">
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.22 }}
+          viewport={{ once: false, amount: 0.22 }}
           className="max-w-xl"
         >
-          <Eyebrow>Rede AMG</Eyebrow>
-          <SectionHeading className="max-w-xl">
-            Presença estratégica em praças portuárias do Brasil.
-          </SectionHeading>
+          <Eyebrow>Agências</Eyebrow>
+          <SectionHeading className="max-w-xl">Presença em praças portuárias do Brasil.</SectionHeading>
           <SectionText>
-            Um mapa interativo das agências da AMG para orientar contato, presença operacional
-            e relacionamento com clientes marítimos e logísticos.
+            Um mapa interativo das agências da AMG para orientar contato, presença operacional e relacionamento com clientes marítimos e logísticos.
           </SectionText>
 
           <div className="mt-8 flex flex-wrap gap-2">
@@ -39,10 +36,10 @@ export function AgenciesMapSection() {
                 key={agency.name}
                 type="button"
                 onClick={() => setActiveAgency(agency)}
-                className={`rounded-lg border px-3 py-2 text-xs font-black transition duration-300 ${
+                className={`rounded-md border px-3 py-2 text-xs font-black uppercase transition duration-300 ${
                   activeAgency.name === agency.name
-                    ? "border-brass/70 bg-brass/15 text-brass shadow-[0_0_28px_rgba(199,167,106,.14)]"
-                    : "border-white/15 bg-white/[0.06] text-mist/65 hover:border-ocean/45 hover:text-white"
+                    ? "border-cyan bg-cyan text-ink"
+                    : "border-ink/12 bg-white text-ink/62 hover:border-cyan hover:text-ink"
                 }`}
               >
                 {agency.name.replace("AMG ", "")}
@@ -55,8 +52,8 @@ export function AgenciesMapSection() {
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.18 }}
-          className="relative overflow-hidden rounded-lg border border-white/15 bg-white/[0.07] p-3 shadow-premium backdrop-blur-2xl sm:p-5"
+          viewport={{ once: false, amount: 0.18 }}
+          className="relative overflow-hidden rounded-md border border-ink/10 bg-white/86 p-3 shadow-premium backdrop-blur sm:p-5"
         >
           <BrazilOperationsMap activeAgency={activeAgency} setActiveAgency={setActiveAgency} />
         </motion.div>
@@ -72,10 +69,7 @@ function BrazilOperationsMap({ activeAgency, setActiveAgency }) {
   );
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-white/10 bg-[#06111d]">
-      <div className="pointer-events-none absolute inset-0 z-[410] bg-[radial-gradient(circle_at_58%_42%,rgba(40,182,200,.16),transparent_18rem),linear-gradient(140deg,rgba(255,255,255,.055),transparent_36%)]" />
-      <div className="pointer-events-none absolute inset-x-8 top-10 z-[410] h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
+    <div className="relative overflow-hidden rounded-md border border-ink/10 bg-ink">
       <MapContainer
         center={[-18.8, -45.5]}
         zoom={4}
@@ -83,7 +77,7 @@ function BrazilOperationsMap({ activeAgency, setActiveAgency }) {
         maxZoom={7}
         scrollWheelZoom={false}
         zoomControl={false}
-        className="z-0 h-[430px] w-full rounded-lg bg-night sm:h-[540px] lg:h-[620px]"
+        className="z-0 h-[430px] w-full rounded-md bg-ink sm:h-[540px] lg:h-[620px]"
         attributionControl
       >
         <MapFocus agency={activeAgency} />
@@ -96,7 +90,7 @@ function BrazilOperationsMap({ activeAgency, setActiveAgency }) {
           <Polyline
             key={`${route[1][0]}-${route[1][1]}`}
             positions={route}
-            pathOptions={{ color: "#28b6c8", weight: 2, opacity: 0.38, dashArray: "6 10" }}
+            pathOptions={{ color: "#00c3d9", weight: 2, opacity: 0.46, dashArray: "6 10" }}
             className="amg-route"
           />
         ))}
@@ -135,8 +129,8 @@ function PortMarker({ agency, active, onActivate }) {
         center={agency.coordinates}
         radius={active ? 20 : isMain ? 18 : 14}
         pathOptions={{
-          color: isMain ? "#c7a76a" : "#28b6c8",
-          fillColor: isMain ? "#c7a76a" : "#28b6c8",
+          color: isMain ? "#c7a76a" : "#00c3d9",
+          fillColor: isMain ? "#c7a76a" : "#00c3d9",
           fillOpacity: 0.08,
           opacity: 0.35,
           weight: 1
@@ -149,7 +143,7 @@ function PortMarker({ agency, active, onActivate }) {
         radius={active ? 8 : isMain ? 7 : 6}
         pathOptions={{
           color: "rgba(255,255,255,.86)",
-          fillColor: active ? "#28b6c8" : "#c7a76a",
+          fillColor: active ? "#00c3d9" : "#c7a76a",
           fillOpacity: 1,
           opacity: 1,
           weight: 1.5
@@ -173,34 +167,34 @@ function FloatingAgencyCard({ agency }) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 10, scale: 0.98 }}
         transition={{ duration: 0.28, ease: "easeOut" }}
-        className="relative z-[420] m-3 rounded-lg border border-white/15 bg-night/85 p-5 shadow-premium backdrop-blur-2xl sm:m-5 md:absolute md:bottom-6 md:right-6 md:m-0 md:w-[21rem]"
+        className="relative z-[420] m-3 rounded-md border border-white/15 bg-ink/90 p-5 text-white shadow-premium backdrop-blur-xl sm:m-5 md:absolute md:bottom-6 md:right-6 md:m-0 md:w-[21rem]"
       >
-        <div className="absolute inset-0 rounded-lg bg-[radial-gradient(circle_at_20%_0%,rgba(40,182,200,.14),transparent_13rem)]" />
-        <div className="relative">
-          <div className="mb-4 flex items-start justify-between gap-4">
-            <div>
-              <h3 className="text-lg font-black text-white">{agency.name}</h3>
-              {agency.tag && (
-                <span className="mt-2 inline-flex rounded-md border border-brass/45 bg-brass/10 px-2 py-1 text-[11px] font-black uppercase tracking-normal text-brass">
-                  {agency.tag}
-                </span>
-              )}
-            </div>
-            <MapPin className="shrink-0 text-ocean" size={20} />
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <div>
+            <h3 className="text-lg font-black uppercase text-white">{agency.name}</h3>
+            {agency.tag && (
+              <span className="mt-2 inline-flex rounded-md border border-cyan/45 bg-cyan/10 px-2 py-1 text-[11px] font-black uppercase text-cyan">
+                {agency.tag}
+              </span>
+            )}
           </div>
-          <p className="m-0 text-sm leading-6 text-mist/65">{agency.address}</p>
-          <a
-            href={directionsUrl(agency.address)}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-5 inline-flex items-center gap-2 text-sm font-black text-ocean transition duration-300 hover:text-cyan-200"
-            aria-label={`Como chegar em ${agency.address}`}
-          >
-            Como chegar
-            <Navigation size={15} />
-          </a>
+          <MapPin className="shrink-0 text-cyan" size={20} />
         </div>
+        <p className="m-0 text-sm font-bold leading-6 text-white/65">{agency.address}</p>
+        <a
+          href={directionsUrl(agency.address)}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase text-cyan transition duration-300 hover:text-cyanLight"
+          aria-label={`Como chegar em ${agency.address}`}
+        >
+          Como chegar
+          <Navigation size={15} />
+        </a>
       </motion.article>
     </AnimatePresence>
   );
 }
+
+
+

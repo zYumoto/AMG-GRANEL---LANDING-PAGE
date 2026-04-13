@@ -1,55 +1,86 @@
-import { motion } from "framer-motion";
-import { Eyebrow, SectionHeading, SectionShell, SectionText } from "./SectionShell.jsx";
-import { services } from "../lib/content.js";
+﻿import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import serviceContainersImage from "../assets/service-containers.jpg";
+import serviceShipImage from "../assets/service-ship.jpg";
+import { serviceHighlights, services } from "../lib/content.js";
 import { fadeUp, stagger } from "../lib/motion.js";
+import { Eyebrow, SectionHeading, SectionShell, SectionText } from "./SectionShell.jsx";
+
+const serviceImages = [serviceContainersImage, serviceShipImage];
 
 export function ServicesSection() {
   return (
-    <SectionShell
-      id="servicos"
-      className="bg-[linear-gradient(180deg,#07131f_0%,#0a1b2b_52%,#07131f_100%)]"
-    >
-      <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }}>
-        <Eyebrow>Serviços</Eyebrow>
-        <SectionHeading>
-          Suporte de agenciamento marítimo para cada ponto crítico da escala.
-        </SectionHeading>
-        <SectionText>
-          Suporte direto às rotinas que determinam se uma escala portuária avança com clareza,
-          tempo correto e coordenação adequada.
-        </SectionText>
-      </motion.div>
+    <SectionShell id="servicos" className="bg-[linear-gradient(180deg,#0d1018_0%,#1b2529_100%)] text-white">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)] lg:gap-16">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.25 }}>
+          <Eyebrow>Serviços</Eyebrow>
+          <SectionHeading className="text-white">Suporte marítimo de ponta a ponta.</SectionHeading>
+          <SectionText className="text-white/68">
+            Agenciamento, coordenação portuária, apoio documental e contato operacional reunidos em uma comunicação sóbria e direta.
+          </SectionText>
+          <a
+            href="#contato"
+            className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase text-cyan transition duration-300 hover:text-cyanLight"
+          >
+            Solicitar contato
+            <ArrowRight size={17} />
+          </a>
+        </motion.div>
 
-      <motion.div
-        variants={stagger}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.16 }}
-        className="mt-10 grid items-stretch gap-4 sm:mt-12 md:grid-cols-2 md:gap-5 xl:grid-cols-3"
-      >
-        {services.map((service) => (
-          <ServiceCard key={service.title} {...service} />
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.16 }}
+          className="grid gap-4"
+        >
+          {services.map((service) => (
+            <ServiceRow key={service.title} {...service} />
+          ))}
+        </motion.div>
+      </div>
+
+      <div className="mt-16 grid gap-5 lg:grid-cols-2">
+        {serviceHighlights.map((highlight, index) => (
+          <motion.article
+            key={highlight.title}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            className="grid overflow-hidden rounded-md border border-white/12 bg-white text-ink shadow-premium md:grid-cols-[minmax(220px,.9fr)_1fr]"
+          >
+            <div className="h-64 bg-[linear-gradient(135deg,#dfe7e8,#8bb6bd)] md:h-full">
+              <img className="h-full w-full object-cover object-bottom saturate-125 contrast-110" src={serviceImages[index]} alt="Operação portuária marítima" onError={(event) => { event.currentTarget.style.display = "none"; }} />
+            </div>
+            <div className="p-6 sm:p-8">
+              <h3 className="text-3xl font-black uppercase leading-tight text-ink">{highlight.title}</h3>
+              <p className="mt-5 text-sm font-bold leading-7 text-ink/60">{highlight.description}</p>
+            </div>
+          </motion.article>
         ))}
-      </motion.div>
+      </div>
     </SectionShell>
   );
 }
 
-function ServiceCard({ icon: Icon, title, description }) {
+function ServiceRow({ icon: Icon, title, description }) {
   return (
-    <motion.article
-      variants={fadeUp}
-      whileHover={{ y: -9, scale: 1.015 }}
-      className="group relative flex h-full min-h-[230px] overflow-hidden rounded-lg border border-white/15 bg-white/[0.07] p-6 shadow-glass backdrop-blur-2xl transition duration-300 hover:border-ocean/45 hover:shadow-[0_34px_100px_rgba(0,0,0,.48),0_0_70px_rgba(40,182,200,.13)] sm:min-h-[260px] sm:p-7"
-    >
-      <div className="absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100 bg-[linear-gradient(135deg,rgba(255,255,255,.16),transparent_36%,rgba(40,182,200,.08))]" />
-      <div className="relative flex h-full flex-col">
-        <span className="mb-5 grid h-11 w-11 place-items-center rounded-lg border border-ocean/30 bg-ocean/10 text-ocean transition duration-300 group-hover:border-ocean/60 group-hover:shadow-[0_0_38px_rgba(40,182,200,.18)] sm:mb-6">
-          <Icon size={22} strokeWidth={1.75} />
-        </span>
-        <h3 className="text-lg font-black text-white">{title}</h3>
-        <p className="mt-4 text-sm leading-7 text-mist/62">{description}</p>
+    <motion.article variants={fadeUp} className="grid gap-4 rounded-md border border-white/15 bg-white/[0.08] p-5 text-white transition duration-300 hover:border-cyan hover:bg-white/[0.12] sm:grid-cols-[3rem_1fr] sm:p-6">
+      <span className="grid h-12 w-12 place-items-center rounded-md bg-cyan text-ink">
+        <Icon size={22} strokeWidth={1.75} />
+      </span>
+      <div>
+        <h3 className="text-xl font-black uppercase leading-tight text-white">{title}</h3>
+        <p className="mt-3 text-sm font-bold leading-7 text-white/62">{description}</p>
       </div>
     </motion.article>
   );
 }
+
+
+
+
+
+
+

@@ -1,20 +1,21 @@
-/** @type {import('tailwindcss').Config} */
+﻿/** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       colors: {
-        night: "#07131f",
-        deep: "#0a1b2b",
-        harbor: "#0f3346",
-        ocean: "#28b6c8",
-        brass: "#c7a76a",
-        mist: "#eef6fb"
+        ink: "#0d1018",
+        graphite: "#1b1f29",
+        paper: "#fbfcfe",
+        mist: "#eef4f6",
+        cyan: "#00c3d9",
+        cyanLight: "#7ce5ef",
+        brass: "#c7a76a"
       },
       boxShadow: {
-        glass: "0 28px 90px rgba(0, 0, 0, 0.42)",
-        premium: "0 40px 120px rgba(0, 0, 0, 0.56)",
-        glow: "0 0 80px rgba(40, 182, 200, 0.22)"
+        glass: "0 24px 70px rgba(13, 16, 24, 0.12)",
+        premium: "0 40px 110px rgba(13, 16, 24, 0.24)",
+        line: "0 1px 0 rgba(13, 16, 24, 0.1)"
       },
       fontFamily: {
         sans: ["Inter", "Geist", "Segoe UI", "Arial", "sans-serif"]

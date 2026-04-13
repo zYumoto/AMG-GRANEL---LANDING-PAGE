@@ -1,18 +1,52 @@
-import {
+﻿import {
   Anchor,
   ClipboardCheck,
   Compass,
   FileText,
   Network,
-  RadioTower
+  RadioTower,
+  Ship,
+  ShieldCheck
 } from "lucide-react";
 
 export const navItems = [
-  { label: "Empresa", href: "#empresa" },
-  { label: "Agências", href: "#agencias" },
+  { label: "Início", href: "#inicio" },
+  { label: "Atuação", href: "#categorias" },
   { label: "Serviços", href: "#servicos" },
-  { label: "Confiança", href: "#confianca" },
-  { label: "Contato", href: "#contato" }
+  { label: "Agências", href: "#agencias" },
+  { label: "Empresa", href: "#empresa" }
+];
+
+export const portSignals = [
+  "Santos",
+  "Salvador",
+  "Paranaguá",
+  "Recife / Suape",
+  "Porto Alegre",
+  "Rio Grande"
+];
+
+export const categories = [
+  {
+    icon: Ship,
+    title: "Escala de embarcações",
+    description: "Acompanhamento da chegada, estadia e saída com comunicação objetiva entre as partes."
+  },
+  {
+    icon: Network,
+    title: "Coordenação portuária",
+    description: "Interface com terminais, prestadores, armadores, clientes e stakeholders operacionais."
+  },
+  {
+    icon: FileText,
+    title: "Fluxo documental",
+    description: "Organização das informações necessárias para rotinas marítimas, portuárias e comerciais."
+  },
+  {
+    icon: ShieldCheck,
+    title: "Interface institucional",
+    description: "Apoio no relacionamento com autoridades e participantes críticos da operação."
+  }
 ];
 
 export const services = [
@@ -26,7 +60,7 @@ export const services = [
     icon: Network,
     title: "Coordenação portuária",
     description:
-      "Interface com terminais, prestadores e stakeholders envolvidos na operação de chegada, estadia e saída."
+      "Interface com terminais, prestadores e stakeholders envolvidos na chegada, estadia e saída."
   },
   {
     icon: RadioTower,
@@ -38,7 +72,7 @@ export const services = [
     icon: FileText,
     title: "Acompanhamento documental",
     description:
-      "Organização e monitoramento dos fluxos de informação relacionados aos procedimentos marítimos e portuários."
+      "Monitoramento dos fluxos de informação relacionados aos procedimentos marítimos e portuários."
   },
   {
     icon: ClipboardCheck,
@@ -51,6 +85,19 @@ export const services = [
     title: "Suporte logístico da escala",
     description:
       "Coordenação de necessidades práticas ligadas à escala da embarcação e aos serviços relacionados."
+  }
+];
+
+export const serviceHighlights = [
+  {
+    title: "Brasil costeiro",
+    description:
+      "Agências em praças estratégicas para apoiar operações marítimas com presença local e leitura portuária."
+  },
+  {
+    title: "Atendimento coordenado",
+    description:
+      "Contato centralizado com base em Santos e relacionamento com parceiros operacionais em cada praça."
   }
 ];
 
